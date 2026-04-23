@@ -293,8 +293,9 @@ section#intro p {
 
 .restaurant .cards .card .container .description {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row; /* ✅ */
+    justify-content: space-between;
+    align-items: center;
     color: black;
 }
 
@@ -303,27 +304,28 @@ section#intro p {
     justify-content: space-between;
 }
 
-.restaurant .cards .card .container .description .fa-heart {
-    font-size: 24px;
-    position: absolute;
-    bottom: 22px;
-    right: 30px;
+
+.heart-empty {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.heart-full {
+    opacity: 0;
+    background: linear-gradient(180deg, rgba(255,121,218,1) 0%, rgba(147,86,220,1) 100%);
     background-clip: text;
     -webkit-background-clip: text;
-}
-
-.heart-two {
-    opacity: 0;
-    background-clip: text;
-    background: linear-gradient(180deg, rgba(255,121,218,1) 0%, rgba(147,86,220,1) 100%);
+    -webkit-text-fill-color: transparent; /* 🔥 TRÈS IMPORTANT */
     color: transparent;
-    transform: scale(1.1);
-    
+    transition: opacity 0.3s;
 }
 
-.heart-two:hover {
+.hearts:hover .heart-empty{
+    opacity: 0;
+}
+
+.hearts:hover .heart-full{
     opacity: 1;
-    transition: opacity 0.5s;
 }
 
 .footer  {
@@ -429,25 +431,52 @@ section#intro p {
 }
 
 .menu h1 span {
-    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.description {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+
+    width: 100%; /* 🔥 très important */
+}
+
+/* bloc texte */
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 🔥 empêche centrage */
+    gap: 4px;
+}
+
+/* titre */
+.text h4 {
+    margin: 0;
+}
+
+/* sous-texte */
+.text span {
+    margin: 0;
+}
+
+
+.hearts {
+   position: relative;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.hearts i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 24px;
     cursor: pointer;
 }
 
-.menu h1 .fa-heart {
-    position: absolute;
-    right: 20px;
-    background-clip: text;
-    -webkit-background-clip: text;
-}
-
-@media screen and (min-width: 768px) {
-    .menu h1 .fa-heart {
-        right: -30px;
-    }
-}
 
 .menu > div .choix {
     opacity: 0;
